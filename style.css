@@ -1,0 +1,92 @@
+*{
+    padding:0;
+    margin:0;
+}
+
+body{
+    margin-top:20px;
+    
+    color:black;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.5em; 
+
+}
+.container{
+    width:50%;
+    
+    margin:auto;
+    padding:10px;
+}
+.button{
+    width:30%;
+    padding:6px;
+    margin:10px 5px;
+    background:deepskyblue;
+    color:black;
+    border:1px solid dodgerblue;
+    border-radius:5px;
+    font-weight: bold;
+}
+.button:hover{
+    background:green;
+}
+
+.button-red{
+    width:30%;
+    padding:5px;
+    margin:5px 5px;
+    background:red;
+    color:black;
+    border:1px solid crimson;
+    border-radius:5px;
+}
+
+.clr{
+    clear:both;
+}
+
+.container h1{
+    font-size: 32px;
+    text-align:center;
+    font-family: Tahoma; 
+}
+.my-span{
+     color:deepskyblue;
+ }
+
+#my-form{
+     margin:10px;
+     padding:10px;
+ }
+.form-inputs{
+    padding:5px;
+}
+.form-inputs label{
+     display:block;
+     font-weight: bold;
+ }
+
+.form-inputs input[type="text"]{
+     width:100%;
+     padding:8px;
+     border:1px solid black;
+     border-radius:5px;
+ }
+
+ table{
+     width:100%;
+     margin-left:10px;
+ }
+
+ #table-head th{
+     text-align:center;
+     border-bottom:1px solid black;
+     
+
+ }
+
+ #table-body td{
+    text-align:center;
+    border-bottom:1px solid darkgray;
+   
+}
