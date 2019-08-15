@@ -41,6 +41,22 @@ body{
     border-radius:5px;
 }
 
+.alert-success{
+    color:white;
+    background: green;
+    width:90%;
+    margin-left:25px;
+    text-align: center;
+}
+.alert-danger{
+    color:black;
+    background:red;
+    width:90%;
+    margin-left:25px;
+    text-align: center;
+    
+}
+
 .clr{
     clear:both;
 }

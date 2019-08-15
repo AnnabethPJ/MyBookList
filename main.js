@@ -6,10 +6,15 @@ class Book{
         this.isbn=isbn;
     }
 }
-
-
 //UI class
 class UI{
+    //method display
+    static displayBooks(){
+        const books=Store.getBooks();
+        books.forEach((book)=>UI.addBookToList(book));
+
+    }
+    //method to add book to list
     static addBookToList(book){
 
         const list=document.querySelector("#table-body");
@@ -23,34 +28,63 @@ class UI{
 
         list.appendChild(row);
     }
-
+    //method to remov book from list
     static removeBookFromList(el){
         if(el.classList.contains("button-red")){
             el.parentElement.parentElement.remove();
+            
         }
 
     }
-
+    //method to clear the input
     static clearFields(){
         document.getElementById("title").value="";
         document.getElementById("author").value="";
         document.getElementById("isbn").value="";
     }
-
-   /* static showMessage(message,className){
+    //method to show alert messages
+    static showMessage(message,classname){
         const div=document.createElement("div");
-        div.className=`alert-${className}`;
+        div.className=`alert-${classname}`;
         div.appendChild(document.createTextNode(message));
 
-        const container=document.querySelector(".container");
+        const formSection=document.querySelector("#form-section");
         const form=document.querySelector("#my-form");
-        container.insertBefore(div,form);
+        formSection.insertBefore(div,form);
 
-        setTimeout(()=>
-        document.querySelector(`alert-${className}`).remove(),3000);
+        setTimeout(()=>document.querySelector(`.alert-${classname}`).remove(),3000);
+    }
+}
+//Store class
+class Store{
+    static getBooks(){
+        let books;
+        if(localStorage.getItem('books')===null){
+            books=[];
+        }
+        else{
+            books=JSON.parse(localStorage.getItems('books'));
+        }
+        return books;
+    }
+
+    static addBooks(book){
+        const books=Store.getBooks();
+        books.push(book);
+        localStorage.setItem('books',JSON.stringify(books));
+
+    }
+
+    static removeBook(isbn){
+        const books=Store.getBooks();
+        books.forEach((book,index)=>{
+            if(book.isbn===isbn){
+                books.splice(index,1);
+            }
+        });
         
-
-    }*/
+        localStorage.setItem('books',JSON.stringify(books));
+    }
 }
 
 
@@ -64,18 +98,27 @@ document.getElementById("my-form").addEventListener("submit",(e)=>{
     const author=document.getElementById("author").value;
     const isbn=document.getElementById("isbn").value;
 
-    //instantiate a book object
-    const newBook=new Book(title,author,isbn);
+    //validate
+    if(title==''||author==''||isbn==''){
+        //alert("Please fill in al the fields");
+        UI.showMessage("Please fill all the fields","danger")
 
-    UI.addBookToList(newBook);
+    }
+    else{
+        const newBook=new Book(title,author,isbn);
 
-    UI.clearFields();
+        UI.addBookToList(newBook);
 
-    UI.showMessage("New book is added","success");
+        UI.clearFields();
+
+        UI.showMessage("New book is added","success");
+    }
 });
 
 
 //Event to delete book
 document.querySelector("#table-body").addEventListener("click",(e)=>{
     UI.removeBookFromList(e.target);
+    UI.showMessage(`Record with title "${e.target.parentElement.parentElement.childNodes[1].textContent}"  has been deleted`,"danger");
 });
+
